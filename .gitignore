@@ -1,7 +1,9 @@
 node_modules/
 public/dist/
 .env.development
-.venv/# Logs
+.venv/
+
+# Logs
 logs
 *.log
 npm-debug.log*
