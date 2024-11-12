@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
@@ -6,8 +6,17 @@ import {
   signInWithPopup,
   signOut,
   GoogleAuthProvider,
+  User,
+  UserCredential
 } from "firebase/auth";
-import { getDatabase } from "firebase/database";
+import { getDatabase, Database } from "firebase/database";
+
+interface FirebaseContextType {
+  user: User | null;
+  login: () => Promise<UserCredential>;
+  logout: () => Promise<void>;
+  database: Database;
+}
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -24,10 +33,14 @@ const auth = getAuth(firebaseApp);
 const googleAuthProvider = new GoogleAuthProvider();
 const database = getDatabase(firebaseApp);
 
-const FirebaseContext = createContext(null);
+const FirebaseContext = createContext<FirebaseContextType | null>(null);
 
-export const FirebaseProvider: React.FC = ({ children }) => {
-  const [user, setUser] = useState(null);
+interface FirebaseProviderProps {
+  children: ReactNode;
+}
+
+export const FirebaseProvider: React.FC<FirebaseProviderProps> = ({ children }) => {
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
