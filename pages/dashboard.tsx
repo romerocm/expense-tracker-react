@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { ExpenseList } from '../components/ExpenseList';
 import { useFirebase } from '../context/FirebaseContext';
 import { useRouter } from 'next/router';
 
@@ -38,7 +39,7 @@ const Dashboard: React.FC = () => {
         </div>
       </nav>
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Add components to list and manage expenses here */}
+        <ExpenseList />
       </main>
     </div>
   );
