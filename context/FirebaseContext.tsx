@@ -13,6 +13,7 @@ import { getDatabase, Database } from "firebase/database";
 
 interface FirebaseContextType {
   user: User | null;
+  loading: boolean;
   login: () => Promise<UserCredential>;
   logout: () => Promise<void>;
   database: Database;
@@ -41,10 +42,12 @@ interface FirebaseProviderProps {
 
 export const FirebaseProvider: React.FC<FirebaseProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
+      setLoading(false);
     });
     return () => unsubscribe();
   }, []);
@@ -53,7 +56,7 @@ export const FirebaseProvider: React.FC<FirebaseProviderProps> = ({ children }) 
   const logout = () => signOut(auth);
 
   return (
-    <FirebaseContext.Provider value={{ user, login, logout, database }}>
+    <FirebaseContext.Provider value={{ user, loading, login, logout, database }}>
       {children}
     </FirebaseContext.Provider>
   );

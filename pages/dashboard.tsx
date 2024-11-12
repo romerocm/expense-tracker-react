@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFirebase } from '../context/FirebaseContext';
 import { useRouter } from 'next/router';
 
 const Dashboard: React.FC = () => {
-  const { user, logout } = useFirebase();
+  const { user, logout, loading } = useFirebase();
   const router = useRouter();
 
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push('/login');
+    }
+  }, [user, loading, router]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-xl">Loading...</div>
+      </div>
+    );
+  }
+
   if (!user) {
-    router.push('/login');
     return null;
   }
 

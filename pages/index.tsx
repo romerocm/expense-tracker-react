@@ -4,17 +4,27 @@ import { useFirebase } from '../context/FirebaseContext';
 
 const IndexPage = () => {
   const router = useRouter();
-  const { user } = useFirebase();
+  const { user, loading } = useFirebase();
 
   useEffect(() => {
-    if (user) {
-      router.push('/dashboard');
-    } else {
-      router.push('/login');
+    if (!loading) {
+      if (user) {
+        router.push('/dashboard');
+      } else {
+        router.push('/login');
+      }
     }
-  }, [user, router]);
+  }, [user, loading, router]);
 
-  return null; // This page redirects, so we don't need to render anything
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-xl">Loading...</div>
+      </div>
+    );
+  }
+
+  return null;
 };
 
 export default IndexPage;
