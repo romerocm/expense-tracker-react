@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import { initializeApp } from "firebase/app";
+import { initializeApp } from "../../node_modules/firebase/app";
 import {
   getAuth,
   onAuthStateChanged,

@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
+import Link from '../../node_modules/next/link';
 
 const DashboardContent: React.FC = () => (
   <div className="min-h-screen bg-gray-50">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useExpenses } from '../hooks/useExpenses';
+import { useExpenses } from '../../hooks/useExpenses';
 
 export const ExpenseList: React.FC = () => {
   const { expenses, loading } = useExpenses();

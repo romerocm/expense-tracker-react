@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
+import Link from '../../node_modules/next/link';
 
 interface Expense {
   id: string;

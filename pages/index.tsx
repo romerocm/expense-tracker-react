@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { useFirebase } from '../context/FirebaseContext';
+import { useFirebase } from '../../context/FirebaseContext';
 
 const IndexPage = () => {
   const router = useRouter();

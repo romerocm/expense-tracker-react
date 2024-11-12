@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ExpenseList } from '../components/ExpenseList';
+import { ExpenseList } from '../../components/ExpenseList';
 import { useFirebase } from '../context/FirebaseContext';
 import { useRouter } from 'next/router';
 
